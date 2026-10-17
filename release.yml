@@ -1,0 +1,20 @@
+# Push a tag like v1.2 -> builds a Fluffy Mod Manager-ready zip and attaches it to a GitHub Release
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package
+        run: |
+          mkdir dist
+          (cd mod && zip -r "../dist/Scorpion-Moveset-${GITHUB_REF_NAME}-Fluffy.zip" "Scorpion Moveset")
+          zip -r "dist/Scorpion-Moveset-${GITHUB_REF_NAME}-installer.zip" install.ps1 install.bat uninstall.ps1 README.md mod
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip

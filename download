@@ -1,0 +1,16 @@
+# Never commit ripped game assets
+*.mesh*
+*.mdf2*
+*.tex*
+*.motlist*
+*.efx*
+*.pak
+*.psk
+*.psa
+*.uasset
+*.uexp
+natives/
+exports/
+*.blend
+*.blend1
+__pycache__/
